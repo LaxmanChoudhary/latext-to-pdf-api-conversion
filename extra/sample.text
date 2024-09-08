@@ -1,0 +1,54 @@
+::::: ResumeSection
+skills
+
+::: ResumeSubsection
+org=Engineering
+
+-   **Backend Development** - python, django, django-rest-framework
+
+-   **Frontend Development** - javascript, react.js, HTML, CSS, Angular
+
+-   **Infrasructure** - Container based environments, Cloud service
+    providers including AWS and GCP
+:::
+
+::: ResumeSubsection
+org=General
+
+-   **Language Skills** - Hindi as mother tongue, fluent English and
+    Gujarati
+:::
+:::::
+
+:::: ResumeSection
+experience
+
+::: ResumeSubsection
+org=Tata Consultancy Services ltd.,location=Ahmedabad,
+India,position=Systems Engineer,duration=2021.08-Present
+
+-   Developed python API's for healthcare monitoring system.
+
+-   
+
+-   
+
+-   
+:::
+::::
+
+:::: ResumeSection
+education
+
+::: ResumeSubsection
+org=Gujarat Technological University,position=Bachelors of Engineering,
+Information technology,duration=2016.07-2020.05
+:::
+::::
+
+::: ResumeSection
+projects
+
+-   Developed Face recognition model on \"Introduction to Deep
+    learning\" lecture *Autumn, 2019*
+:::
