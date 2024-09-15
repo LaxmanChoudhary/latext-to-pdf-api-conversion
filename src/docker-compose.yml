@@ -1,5 +1,6 @@
 services:
-  web:
+  latex-to-pdf:
+    image: laxman6811/latex-to-pdf:latest
     build: .
     ports:
       - "5000:5000"

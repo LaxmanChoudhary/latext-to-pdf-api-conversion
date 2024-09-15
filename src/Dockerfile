@@ -1,12 +1,26 @@
 # Use an official Python runtime as a parent image
-FROM python:3.11-slim-bullseye
+FROM python:3.11-slim-bookworm
 
-# Install LaTeX
+# Set version label
+LABEL version="2.0"
+# Custom image name: latex-pdf-converter
+
+# Install necessary dependencies for Tectonic
 RUN apt-get update && apt-get install -y \
-    texlive-latex-base \
-    texlive-fonts-recommended \
-    texlive-fonts-extra \
-    texlive-latex-extra
+    libfontconfig1 \
+    libgraphite2-3 \
+    libharfbuzz0b \
+    libicu72 \
+    libssl3 \
+    zlib1g \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Tectonic
+RUN wget https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%400.15.0/tectonic-0.15.0-x86_64-unknown-linux-gnu.tar.gz \
+    && tar -xzvf tectonic-0.15.0-x86_64-unknown-linux-gnu.tar.gz \
+    && mv tectonic /usr/local/bin/ \
+    && rm tectonic-0.15.0-x86_64-unknown-linux-gnu.tar.gz
 
 # Set the working directory in the container
 WORKDIR /app
