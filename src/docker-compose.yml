@@ -1,8 +1,33 @@
 services:
+  mysql01:
+    container_name: mysql01
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./init.sql:/docker-entrypoint-initdb.d/1.sql"
+
   latex-to-pdf:
+    container_name: backend
     image: laxman6811/latex-to-pdf:latest
+    links:
+      - mysql01
     build: .
+    depends_on:
+      - mysql01
+    env_file:
+      - .env.dev
     ports:
       - "5000:5000"
     volumes:
       - .:/app
+# TODO: research on ports left
+#  rabbitmq:
+#    image: rabbitmq:4-management
+#    ports:
+#      - protocol: tcp
+#        target: 15672
+#      - protocol: tcp
+#        target: 5672

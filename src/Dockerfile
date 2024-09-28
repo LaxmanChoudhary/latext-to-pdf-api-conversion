@@ -2,11 +2,14 @@
 FROM python:3.11-slim-bookworm
 
 # Set version label
-LABEL version="2.0"
+LABEL version="3.0"
 # Custom image name: latex-pdf-converter
 
 # Install necessary dependencies for Tectonic
 RUN apt-get update && apt-get install -y \
+    default-libmysqlclient-dev \
+    pkg-config \
+    build-essential \
     libfontconfig1 \
     libgraphite2-3 \
     libharfbuzz0b \
