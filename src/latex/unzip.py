@@ -18,7 +18,6 @@ def unzip(zip_file_path):
         with ZipFile(zip_file_path, 'r') as fzip:
             fzip.extractall(path=zip_container_dir)
     except Exception as ex:
-        # app.logger.error(ex)
         return None, ("Error while unzipping.", 500)
 
     tex_file = None

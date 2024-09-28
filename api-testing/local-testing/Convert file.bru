@@ -1,0 +1,19 @@
+meta {
+  name: Convert file
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{base_url}}/convert
+  body: multipartForm
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imd1ZXN0QHRlc3QuY29tIiwiZXhwaXJhdGlvbiI6MTcyNzU5NjQ4NC4zOTQ4LCJpYXQiOjE3Mjc1MTAwODQuMzk0ODE0LCJhZG1pbiI6dHJ1ZX0.V__wCE86tsTKD4-xx3y267Rn0QDcQrGJd_ed6rCkz58
+}
+
+body:multipart-form {
+  file: @file(D:\projects\python\pdf-from-templates\latex-to-pdf\extra\test-files\sample.tex)
+}

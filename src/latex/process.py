@@ -13,7 +13,6 @@ def compile_latex(file_path):
 
     # chdir to execute command
     os.chdir(fdir)
-    # app.logger.info(f"changed directory to {os.getcwd()} and running file {output_filename+'.tex'}")
 
     # Run Tectonic
     result = subprocess.run(['tectonic', output_filename+".tex"], capture_output=True, text=True)

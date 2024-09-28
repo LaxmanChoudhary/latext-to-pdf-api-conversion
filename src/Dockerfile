@@ -1,10 +1,6 @@
 # Use an official Python runtime as a parent image
 FROM python:3.11-slim-bookworm
 
-# Set version label
-LABEL version="3.0"
-# Custom image name: latex-pdf-converter
-
 # Install necessary dependencies for Tectonic
 RUN apt-get update && apt-get install -y \
     default-libmysqlclient-dev \

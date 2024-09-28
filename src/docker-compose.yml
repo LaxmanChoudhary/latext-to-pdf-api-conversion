@@ -1,28 +1,30 @@
 services:
-  mysql01:
-    container_name: mysql01
-    image: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: "root"
-    ports:
-      - "3306:3306"
-    volumes:
-      - "./init.sql:/docker-entrypoint-initdb.d/1.sql"
+# use in case of local testing
+#  db:
+#    container_name: postgres
+#    image: postgres:16
+#    restart: always
+#    shm_size: 128mb
+#    expose:
+#      - "5432"
+#    environment:
+#      POSTGRES_PASSWORD: root
 
   latex-to-pdf:
     container_name: backend
     image: laxman6811/latex-to-pdf:latest
-    links:
-      - mysql01
+#    links:
+#      - db
     build: .
-    depends_on:
-      - mysql01
+#    depends_on:
+#      - db
     env_file:
       - .env.dev
     ports:
       - "5000:5000"
     volumes:
       - .:/app
+
 # TODO: research on ports left
 #  rabbitmq:
 #    image: rabbitmq:4-management

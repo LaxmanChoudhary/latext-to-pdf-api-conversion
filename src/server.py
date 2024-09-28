@@ -2,7 +2,7 @@ import jwt
 from flask import Flask, request, send_file
 import os
 
-from flask_mysqldb import MySQL
+import psycopg2
 
 from latex import process, unzip
 from auth.core import create_jwt
@@ -10,16 +10,16 @@ from middleware import auth_token_required
 
 app = Flask(__name__)
 
-mysql = MySQL(app)
-
-app.config["MYSQL_HOST"] = os.environ.get("MYSQL_HOST")
-app.config["MYSQL_USER"] = os.environ.get("MYSQL_USER")
-app.config["MYSQL_PASSWORD"] = os.environ.get("MYSQL_PASSWORD")
-app.config["MYSQL_DB"] = os.environ.get("MYSQL_DB")
-app.config["MYSQL_PORT"] = int(os.environ.get("MYSQL_PORT"))
-
 API_VERSION = os.environ.get("API_VERSION", "UNSET")
 
+
+def _db():
+    app.logger.info(os.environ.get("DB_HOST"))
+    conn = psycopg2.connect(host=os.environ.get("DB_HOST"),
+                            database=os.environ.get("DB_DB"),
+                            user=os.environ.get("DB_USER"),
+                            password=os.environ.get("DB_PASSWORD"))
+    return conn
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -27,12 +27,15 @@ def login():
     if not auth:
         return "missing credentials", 401
 
-    cur = mysql.connection.cursor()
-    res = cur.execute("SELECT email, password FROM user WHERE email=%s", (auth.username,))
+    cur = _db().cursor()
+    cur.execute("SELECT email, password FROM \"user\" WHERE email=%s", (auth.username,))
+    res = cur.fetchall()
+    cur.close()
+    _db().close()
 
-    if res > 0:
+    if len(res) > 0:
         # at least one row returned
-        user_row = cur.fetchone()
+        user_row = res[0]
         email = user_row[0]
         password = user_row[1]
 

@@ -2,8 +2,8 @@
 Flask==3.0.0
 
 # auth
-Flask-MySQLdb==2.0.0
+psycopg2-binary
 PyJWT
 
 # handling queue
-pika
+# pika
