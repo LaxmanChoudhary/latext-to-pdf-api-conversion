@@ -3,12 +3,14 @@ from flask import Flask, request, send_file
 import os
 
 import psycopg2
+from flask_cors import CORS
 
 from latex import process, unzip
 from auth.core import create_jwt
 from middleware import auth_token_required
 
 app = Flask(__name__)
+CORS(app)
 
 API_VERSION = os.environ.get("API_VERSION", "UNSET")
 
@@ -20,6 +22,10 @@ def _db():
                             user=os.environ.get("DB_USER"),
                             password=os.environ.get("DB_PASSWORD"))
     return conn
+
+@app.route("/", methods=["GET"])
+def hello():
+    return "Hello! Yes api is up but you are supposed to use other endpoint for the purpose."
 
 @app.route("/login", methods=["POST"])
 def login():

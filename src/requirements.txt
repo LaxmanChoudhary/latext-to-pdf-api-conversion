@@ -1,5 +1,6 @@
 # common
 Flask==3.0.0
+flask_cors
 
 # auth
 psycopg2-binary
