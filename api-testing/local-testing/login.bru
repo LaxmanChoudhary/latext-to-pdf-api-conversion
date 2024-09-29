@@ -1,0 +1,16 @@
+meta {
+  name: login
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/login
+  body: none
+  auth: basic
+}
+
+auth:basic {
+  username: guest@test.com
+  password: guest@123
+}
